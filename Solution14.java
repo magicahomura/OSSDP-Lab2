@@ -1,13 +1,18 @@
+package org.example;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class Solution {
+public class Solution {
     static final int SEG_COUNT = 4;
     List<String> ans = new ArrayList<>();
     int[] segments = new int[SEG_COUNT];
 
     public List<String> restoreIpAddresses(String s) {
         ans.clear(); // 确保每次调用时答案列表是空的
+        if (s.length() < 4 || s.length() > 12) {
+            return ans; // 长度不符合可能IP地址长度的字符串直接返回空结果
+        }
         dfs(s, 0, 0);
         return ans;
     }
@@ -51,20 +56,5 @@ class Solution {
                 break;
             }
         }
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-
-        // 测试用例
-        String s1 = "25525511135";
-        String s2 = "0000";
-        String s3 = "101023";
-
-        System.out.println("Test case 1: " + solution.restoreIpAddresses(s1)); // 输出 ["255.255.11.135", "255.255.111.35"]
-        System.out.println("Test case 2: " + solution.restoreIpAddresses(s2)); // 输出 ["0.0.0.0"]
-        System.out.println("Test case 3: " + solution.restoreIpAddresses(s3)); // 输出 ["1.0.10.23", "1.0.102.3", "10.1.0.23", "10.10.2.3", "101.0.2.3"]
     }
 }
